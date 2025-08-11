@@ -1,23 +1,26 @@
-Pod::Spec.new do |spec|
-  spec.name         = "swift-cmark-pod"
-  spec.version      = "0.29.0"
-  spec.summary      = "GitHub Flavored Markdown extensions to the C reference implementation of CommonMark"
-  spec.description  = <<-DESC
-    cmark-gfm is an extended version of the C reference implementation of
-    CommonMark, a rationalized version of Markdown syntax with a spec. This
-    repository adds GitHub Flavored Markdown extensions to the upstream
-    implementation, as defined in the spec.
-  DESC
+Pod::Spec.new do |s|
+  s.name             = 'swift-cmark-pod'
+  s.version          = '0.29.1'
+  s.summary          = 'A CocoaPods wrapper for the cmark-gfm library.'
+  s.description      = 'This pod provides the cmark-gfm library, including both the core parser and GFM extensions, for use in iOS, macOS, and other Apple platforms.'
+  s.homepage         = 'https://github.com/GIKICoder/swift-cmark'
+  s.license          = { :type => 'BSD-2-Clause', :file => 'COPYING' }
+  s.author           = { 'GIKICoder' => 'https://github.com/GIKICoder' }
+  s.source           = { :git => 'https://github.com/GIKICoder/swift-cmark.git', :tag => s.version.to_s }
 
-  spec.homepage     = "https://github.com/GIKICoder/swift-cmark"
-  spec.license      = { :type => "BSD-2-Clause", :file => "COPYING" }
-  spec.author       = { "GIKICoder" => "https://github.com/GIKICoder" }
+  s.ios.deployment_target = '12.0'
 
-  spec.source       = { :git => "https://github.com/GIKICoder/swift-cmark.git", :tag => "#{spec.version}" }
+  s.default_subspec = 'cmark_gfm', 'cmark_gfm_extensions'
 
-  spec.ios.deployment_target = "12.0"
+  s.subspec 'cmark_gfm' do |ss|
+    ss.source_files = 'src/**/*.{h,c}'
+    ss.public_header_files = 'src/include/*.h'
+    ss.pod_target_xcconfig = { 'MODULEMAP_FILE' => '$(PODS_TARGET_SRCROOT)/src/include/module.modulemap' }
+  end
 
-  spec.source_files = "src/**/*{.c,.h}"
-  spec.preserve_paths = "src/**/*"
-  spec.public_header_files = "src/include/*.h"
+  s.subspec 'cmark_gfm_extensions' do |ss|
+    ss.dependency 'swift-cmark-pod/cmark_gfm'
+    ss.source_files = 'extensions/**/*.{h,c}'
+    ss.public_header_files = 'extensions/include/*.h'
+  end
 end
