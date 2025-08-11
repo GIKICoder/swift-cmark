@@ -15,10 +15,7 @@ Pod::Spec.new do |spec|
 
   spec.source       = { :git => "https://github.com/GIKICoder/swift-cmark.git", :tag => "#{spec.version}" }
 
-  spec.ios.deployment_target = "9.0"
-  spec.osx.deployment_target = "10.10"
-  spec.watchos.deployment_target = "2.0"
-  spec.tvos.deployment_target = "9.0"
+  spec.ios.deployment_target = "12.0"
 
   spec.source_files = "src/**/*{.c,.h}"
   spec.preserve_paths = "src/**/*"
