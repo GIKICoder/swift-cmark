@@ -14,6 +14,7 @@ Pod::Spec.new do |s|
 
   s.subspec 'cmark_gfm' do |ss|
     ss.source_files = 'src/**/*.{h,c}'
+    ss.preserve_paths = "src/**/*"
     ss.public_header_files = 'src/include/*.h'
     ss.pod_target_xcconfig = { 'MODULEMAP_FILE' => '$(PODS_TARGET_SRCROOT)/src/include/module.modulemap' }
   end
@@ -21,6 +22,7 @@ Pod::Spec.new do |s|
   s.subspec 'cmark_gfm_extensions' do |ss|
     ss.dependency 'swift-cmark-pod/cmark_gfm'
     ss.source_files = 'extensions/**/*.{h,c}'
+    ss.preserve_paths = 'extensions/**/*'
     ss.public_header_files = 'extensions/include/*.h'
   end
 end
